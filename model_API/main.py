@@ -45,12 +45,17 @@ def predict():
     predicted_label = labels[predicted_class]
     confidence = prediction[0][predicted_class] * 100
 
-    return f'''
-    <h1>Prediction Result</h1>
-    <p>Predicted Class: <strong>{predicted_label}</strong></p>
-    <p>Confidence: <strong>{confidence:.2f}%</strong></p>
-    <a href="/">Back to Home</a>
-    '''
+    return jsonify({
+        "prediction": predicted_label,
+        "confidence": str(confidence)
+    }), 201
+
+    # return f'''
+    # <h1>Prediction Result</h1>
+    # <p>Predicted Class: <strong>{predicted_label}</strong></p>
+    # <p>Confidence: <strong>{confidence:.2f}%</strong></p>
+    # <a href="/">Back to Home</a>
+    # '''
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
