@@ -47,7 +47,7 @@ def predict():
 
     return jsonify({
         "prediction": predicted_label,
-        "confidence": str(confidence)
+        "confidence": float(np.float32(confidence))
     }), 201
 
     # return f'''
